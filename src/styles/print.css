@@ -1,0 +1,67 @@
+@media print {
+  /* Yazdırma için gereksiz elementleri gizle */
+  button,
+  .search-bar,
+  .user-avatar-list,
+  .language-switch,
+  .theme-switch,
+  .keyboard-shortcuts {
+    display: none !important;
+  }
+
+  /* Sayfa yapısını düzenle */
+  .board {
+    padding: 20px !important;
+    margin: 0 !important;
+  }
+
+  /* Kolonları yan yana düzenle */
+  .columns-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  /* Task kartlarını düzenle */
+  .task-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    background-color: white !important;
+    border: 1px solid #ddd !important;
+    margin-bottom: 10px !important;
+    padding: 10px !important;
+  }
+
+  /* Metin renklerini siyah yap */
+  * {
+    color: black !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Arka plan renklerini beyaz yap */
+  body {
+    background: white !important;
+  }
+
+  /* Her kolonun başlığını belirgin yap */
+  .column-title {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
+    border-bottom: 2px solid #000 !important;
+    padding-bottom: 5px !important;
+  }
+
+  /* İstatistikleri düzenle */
+  .board-stats {
+    margin-bottom: 20px !important;
+    padding: 10px !important;
+    border: 1px solid #ddd !important;
+  }
+
+  /* Sayfa sonlarını düzenle */
+  @page {
+    margin: 2cm;
+  }
+} 
