@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useBoardContext } from '../../context/BoardContext';
 
-const ExportMenu: React.FC = () => {
+export const ExportMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useLanguage();
   const { columns } = useBoardContext();
@@ -108,6 +108,4 @@ const ExportMenu: React.FC = () => {
       )}
     </div>
   );
-};
-
-export default ExportMenu; 
+}; 

@@ -74,5 +74,15 @@ export const tr = {
         description: "Proje ilerlemesini detaylı grafiklerle takip edin"
       }
     }
+  },
+  tags: {
+    Bug: "Hata",
+    Feature: "Özellik",
+    Documentation: "Dokümantasyon",
+    Enhancement: "İyileştirme",
+    Design: "Tasarım",
+    HIGH: "Yüksek Öncelik",
+    MEDIUM: "Orta Öncelik",
+    LOW: "Düşük Öncelik"
   }
 }; 

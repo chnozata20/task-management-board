@@ -2,20 +2,20 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
-import { useBoardContext } from '../../context/BoardContext';
-import { Column } from './Column';
-import { ColumnType } from '../../types';
-import { TaskModal } from '../modals/TaskModal';
+import { useBoardContext } from '@/context/BoardContext';
+import { Column as ColumnComponent } from './Column';
+import { ColumnType, Task, Column } from '@/types';
+import { TaskModal } from '../modals/task/TaskModal';
 import { UserAvatarList } from '../users/UserAvatarList';
 import { SearchBar } from '../search/SearchBar';
-import { BoardStats } from '../stats/BoardStats';
-import { useLanguage } from '../../context/LanguageContext';
+import { BoardStats } from './BoardStats';
+import { useLanguage } from '@/context/LanguageContext';
 import { LanguageSwitch } from '../common/LanguageSwitch';
 import { ThemeSwitch } from '../common/ThemeSwitch';
-import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts';
-import KeyboardShortcuts from '../common/KeyboardShortcuts';
-import { UserModal } from '../modals/UserModal';
-import ExportMenu from '../common/ExportMenu';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
+import { KeyboardShortcuts } from '../common/KeyboardShortcuts';
+import { UserModal } from '../modals/user/UserModal';
+import { ExportMenu } from '../common/ExportMenu';
 
 export function Board() {
   const { columns: originalColumns, updateTaskStatus } = useBoardContext();
@@ -28,9 +28,9 @@ export function Board() {
   const { t } = useLanguage();
 
   const filteredColumns = useMemo(() => {
-    return originalColumns.map(column => ({
+    return originalColumns.map((column: Column) => ({
       ...column,
-      tasks: column.tasks.filter(task => {
+      tasks: column.tasks.filter((task: Task) => {
         const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                             task.description.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesAssignee = !selectedAssignee || task.assignee?.id === selectedAssignee;
@@ -126,7 +126,7 @@ export function Board() {
                 <Droppable key={column.id} droppableId={column.title.toUpperCase()}>
                   {(provided, snapshot) => (
                     <div className="relative group">
-                      <Column
+                      <ColumnComponent
                         column={column}
                         provided={provided}
                         isLoading={isLoading}

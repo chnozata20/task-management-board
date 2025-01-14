@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useBoardContext } from '../../context/BoardContext';
-import { UserModal } from '../modals/UserModal';
+import { UserModal } from '../modals/user/UserModal';
 
 export function UserAvatarList() {
   const { users } = useBoardContext();

@@ -74,5 +74,15 @@ export const en = {
         description: "Track project progress with detailed graphs"
       }
     }
+  },
+  tags: {
+    Bug: "Bug",
+    Feature: "Feature",
+    Documentation: "Documentation",
+    Enhancement: "Enhancement",
+    Design: "Design",
+    HIGH: "High Priority",
+    MEDIUM: "Medium Priority",
+    LOW: "Low Priority"
   }
 }; 

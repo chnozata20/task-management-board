@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
-const KeyboardShortcuts: React.FC = () => {
+export const KeyboardShortcuts: React.FC = () => {
   const { t } = useLanguage();
 
   const shortcuts = [
@@ -41,6 +41,4 @@ const KeyboardShortcuts: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default KeyboardShortcuts; 
+}; 

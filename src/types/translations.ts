@@ -1,76 +1,88 @@
 import type { ColumnType } from '@/types/column';
 
+type TranslationString = string;
+
+type CommonTranslations = {
+  search: TranslationString;
+  allUsers: TranslationString;
+  filters: TranslationString;
+  new: TranslationString;
+  edit: TranslationString;
+  delete: TranslationString;
+  cancel: TranslationString;
+  save: TranslationString;
+  update: TranslationString;
+  create: TranslationString;
+};
+
+type ExportTranslations = {
+  button: TranslationString;
+  json: TranslationString;
+  excel: TranslationString;
+  pdf: TranslationString;
+};
+
+type ShortcutTranslations = {
+  title: TranslationString;
+  newTask: TranslationString;
+  closeModal: TranslationString;
+  newUser: TranslationString;
+};
+
+type BoardTranslations = {
+  newTask: TranslationString;
+  addTask: TranslationString;
+  dropHere: TranslationString;
+  taskCount: TranslationString;
+  storyPoints: TranslationString;
+  projectStats: TranslationString;
+  totalTasks: TranslationString;
+  totalPoints: TranslationString;
+  progress: TranslationString;
+};
+
+type TaskTranslations = {
+  title: TranslationString;
+  description: TranslationString;
+  assignee: TranslationString;
+  startDate: TranslationString;
+  endDate: TranslationString;
+  status: TranslationString;
+  deleteConfirm: TranslationString;
+};
+
+type StatusTranslations = {
+  open: TranslationString;
+  inProgress: TranslationString;
+  inReview: TranslationString;
+  done: TranslationString;
+};
+
+type HomeFeatureTranslations = {
+  title: TranslationString;
+  description: TranslationString;
+};
+
+type HomeTranslations = {
+  title: TranslationString;
+  description: TranslationString;
+  goToBoard: TranslationString;
+  learnMore: TranslationString;
+  features: {
+    teamManagement: HomeFeatureTranslations;
+    taskTracking: HomeFeatureTranslations;
+    statistics: HomeFeatureTranslations;
+  };
+};
+
 export interface Translations {
-  common: {
-    search: string;
-    allUsers: string;
-    filters: string;
-    new: string;
-    edit: string;
-    delete: string;
-    cancel: string;
-    save: string;
-    update: string;
-    create: string;
-  };
-  export: {
-    button: string;
-    json: string;
-    excel: string;
-    pdf: string;
-  };
-  shortcuts: {
-    title: string;
-    newTask: string;
-    closeModal: string;
-    newUser: string;
-  };
-  board: {
-    newTask: string;
-    addTask: string;
-    dropHere: string;
-    taskCount: string;
-    storyPoints: string;
-    projectStats: string;
-    totalTasks: string;
-    totalPoints: string;
-    progress: string;
-  };
-  task: {
-    title: string;
-    description: string;
-    assignee: string;
-    startDate: string;
-    endDate: string;
-    status: string;
-    deleteConfirm: string;
-  };
-  status: {
-    open: string;
-    inProgress: string;
-    inReview: string;
-    done: string;
-  };
-  columnTitles: Record<ColumnType, string>;
-  home: {
-    title: string;
-    description: string;
-    goToBoard: string;
-    learnMore: string;
-    features: {
-      teamManagement: {
-        title: string;
-        description: string;
-      };
-      taskTracking: {
-        title: string;
-        description: string;
-      };
-      statistics: {
-        title: string;
-        description: string;
-      };
-    };
-  };
-  tags: Record<string, string>;
+  common: CommonTranslations;
+  export: ExportTranslations;
+  shortcuts: ShortcutTranslations;
+  board: BoardTranslations;
+  task: TaskTranslations;
+  status: StatusTranslations;
+  columnTitles: Record<ColumnType, TranslationString>;
+  home: HomeTranslations;
+  tags: Record<string, TranslationString>;
 } 

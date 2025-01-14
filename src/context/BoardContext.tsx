@@ -1,17 +1,19 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
-import { Task, User, Column, ColumnType } from '../types';
-import { v4 as uuidv4 } from 'uuid';
+import { Task, User, Column, ColumnType } from '@/types';
 
-interface BoardContextType {
-  columns: Column[];
+export interface BoardContextType {
+  tasks: Task[];
   users: User[];
-  updateTaskStatus: (taskId: string, sourceColumn: ColumnType, destinationColumn: ColumnType) => void;
-  addTask: (task: Omit<Task, 'id'>) => void;
+  columns: Column[];
+  addTask: (task: Task) => void;
   updateTask: (task: Task) => void;
   deleteTask: (taskId: string) => void;
-  addUser: (user: Omit<User, 'id'>) => void;
+  addUser: (user: User) => void;
+  updateUser: (user: User) => void;
+  deleteUser: (userId: string) => void;
+  updateTaskStatus: (taskId: string, sourceColumn: ColumnType, destinationColumn: ColumnType) => void;
 }
 
 const initialUsers: User[] = [
@@ -41,7 +43,12 @@ const initialTasks = [
     storyPoints: 5,
     startDate: '2024-01-14',
     endDate: '2024-01-20',
-    status: 'OPEN' as const
+    status: 'OPEN' as const,
+    priority: 'HIGH' as const,
+    tags: [
+      { id: '5', name: 'Design', color: '#ec4899' },
+      { id: '4', name: 'Enhancement', color: '#a855f7' }
+    ]
   },
   {
     id: '2',
@@ -51,7 +58,12 @@ const initialTasks = [
     storyPoints: 8,
     startDate: '2024-01-15',
     endDate: '2024-01-25',
-    status: 'IN_PROGRESS' as const
+    status: 'IN_PROGRESS' as const,
+    priority: 'MEDIUM' as const,
+    tags: [
+      { id: '2', name: 'Feature', color: '#22c55e' },
+      { id: '4', name: 'Enhancement', color: '#a855f7' }
+    ]
   },
   {
     id: '3',
@@ -61,7 +73,11 @@ const initialTasks = [
     storyPoints: 3,
     startDate: '2024-01-16',
     endDate: '2024-01-18',
-    status: 'IN_REVIEW' as const
+    status: 'IN_REVIEW' as const,
+    priority: 'LOW' as const,
+    tags: [
+      { id: '1', name: 'Bug', color: '#ef4444' }
+    ]
   }
 ];
 
@@ -75,111 +91,83 @@ const initialColumns: Column[] = [
 const BoardContext = createContext<BoardContextType | undefined>(undefined);
 
 export function BoardProvider({ children }: { children: ReactNode }) {
-  const [columns, setColumns] = useState<Column[]>(initialColumns);
+  const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [users, setUsers] = useState<User[]>(initialUsers);
+  const [columns, setColumns] = useState<Column[]>(initialColumns);
 
-  const updateTaskStatus = (taskId: string, sourceColumn: ColumnType, destinationColumn: ColumnType) => {
-    setColumns(prevColumns => {
-      const newColumns = [...prevColumns];
-      
-      // Kaynaktan taskı bul ve kaldır
-      const sourceColumnIndex = newColumns.findIndex(col => 
-        col.tasks.some((task: Task) => task.id === taskId)
-      );
-      const taskToMove = newColumns[sourceColumnIndex].tasks.find(
-        (task: Task) => task.id === taskId
-      );
-      
-      if (!taskToMove) return prevColumns;
-      
-      newColumns[sourceColumnIndex].tasks = newColumns[sourceColumnIndex].tasks.filter(
-        (task: Task) => task.id !== taskId
-      );
-      
-      // Hedef kolona taskı ekle
-      const destinationColumnIndex = newColumns.findIndex(col => col.title.toUpperCase() === destinationColumn);
-      taskToMove.status = destinationColumn;
-      newColumns[destinationColumnIndex].tasks.push(taskToMove);
-      
-      return newColumns;
-    });
-  };
-
-  const addTask = useCallback((newTask: Omit<Task, 'id'>) => {
-    setColumns(prev => {
-      let taskId = uuidv4();
-      const allTasks = prev.flatMap(col => col.tasks);
-      
-      // Benzersiz bir ID bulana kadar yeni ID oluştur
-      while (allTasks.some(task => task.id === taskId)) {
-        taskId = uuidv4();
-      }
-
-      return prev.map(column => {
-        if (column.title.toUpperCase() === newTask.status) {
-          return {
-            ...column,
-            tasks: [...column.tasks, { ...newTask, id: taskId }]
-          };
-        }
-        return column;
-      });
-    });
+  const addTask = useCallback((task: Task) => {
+    setTasks(prev => [...prev, task]);
+    setColumns(prev => prev.map(col => 
+      col.title === task.status ? { ...col, tasks: [...col.tasks, task] } : col
+    ));
   }, []);
 
-  const updateTask = (updatedTask: Task) => {
-    setColumns(prevColumns => {
-      const newColumns = [...prevColumns];
-      const columnIndex = newColumns.findIndex(col => 
-        col.tasks.some((task: Task) => task.id === updatedTask.id)
-      );
-      
-      if (columnIndex === -1) return prevColumns;
-      
-      const taskIndex = newColumns[columnIndex].tasks.findIndex(
-        (task: Task) => task.id === updatedTask.id
-      );
-      newColumns[columnIndex].tasks[taskIndex] = updatedTask;
-      
-      return newColumns;
-    });
-  };
+  const updateTask = useCallback((updatedTask: Task) => {
+    setTasks(prev => prev.map(task => 
+      task.id === updatedTask.id ? updatedTask : task
+    ));
+    setColumns(prev => prev.map(col => ({
+      ...col,
+      tasks: col.tasks.map(task => 
+        task.id === updatedTask.id ? updatedTask : task
+      )
+    })));
+  }, []);
 
-  const deleteTask = (taskId: string) => {
-    setColumns(prevColumns => {
-      const newColumns = [...prevColumns];
-      const columnIndex = newColumns.findIndex(col => 
-        col.tasks.some((task: Task) => task.id === taskId)
-      );
-      
-      if (columnIndex === -1) return prevColumns;
-      
-      newColumns[columnIndex].tasks = newColumns[columnIndex].tasks.filter(
-        (task: Task) => task.id !== taskId
-      );
-      
-      return newColumns;
-    });
-  };
+  const deleteTask = useCallback((taskId: string) => {
+    setTasks(prev => prev.filter(task => task.id !== taskId));
+    setColumns(prev => prev.map(col => ({
+      ...col,
+      tasks: col.tasks.filter(task => task.id !== taskId)
+    })));
+  }, []);
 
-  const addUser = (userData: Omit<User, 'id'>) => {
-    const newUser: User = {
-      ...userData,
-      id: crypto.randomUUID()
-    };
-    setUsers(prev => [...prev, newUser]);
+  const updateTaskStatus = useCallback((taskId: string, sourceColumn: ColumnType, destinationColumn: ColumnType) => {
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    const updatedTask = { ...task, status: destinationColumn };
+    setTasks(prev => prev.map(t => t.id === taskId ? updatedTask : t));
+    setColumns(prev => prev.map(col => {
+      if (col.title === sourceColumn) {
+        return { ...col, tasks: col.tasks.filter(t => t.id !== taskId) };
+      }
+      if (col.title === destinationColumn) {
+        return { ...col, tasks: [...col.tasks, updatedTask] };
+      }
+      return col;
+    }));
+  }, [tasks]);
+
+  const addUser = useCallback((user: User) => {
+    setUsers(prev => [...prev, user]);
+  }, []);
+
+  const updateUser = useCallback((updatedUser: User) => {
+    setUsers(prev => prev.map(user => 
+      user.id === updatedUser.id ? updatedUser : user
+    ));
+  }, []);
+
+  const deleteUser = useCallback((userId: string) => {
+    setUsers(prev => prev.filter(user => user.id !== userId));
+  }, []);
+
+  const value = {
+    tasks,
+    users,
+    columns,
+    addTask,
+    updateTask,
+    deleteTask,
+    addUser,
+    updateUser,
+    deleteUser,
+    updateTaskStatus
   };
 
   return (
-    <BoardContext.Provider value={{ 
-      columns, 
-      users, 
-      updateTaskStatus, 
-      addTask, 
-      updateTask,
-      deleteTask,
-      addUser 
-    }}>
+    <BoardContext.Provider value={value}>
       {children}
     </BoardContext.Provider>
   );

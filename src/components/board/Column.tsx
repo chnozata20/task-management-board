@@ -1,19 +1,19 @@
 'use client';
 
 import { DroppableProvided } from '@hello-pangea/dnd';
-import { Column as ColumnType } from '../../types';
+import { Column as ColumnInterface } from '@/types';
 import { Task } from './Task';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { LoadingState } from '../common/LoadingState';
 import { Tooltip } from '../common/Tooltip';
 
 interface ColumnProps {
-  column: ColumnType;
+  column: ColumnInterface;
   provided: DroppableProvided;
   isLoading?: boolean;
 }
 
-export function Column({ column, provided, isLoading }: ColumnProps) {
+export function Column({ column, provided, isLoading = false }: ColumnProps) {
   const { t } = useLanguage();
 
   return (
