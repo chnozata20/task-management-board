@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Modal } from '../base/Modal';
+import { Modal } from '@/components/modals/base/Modal';
 import { useLanguage } from '@/context/LanguageContext';
 import { User } from '@/types';
 import { useBoardContext } from '@/context/BoardContext';

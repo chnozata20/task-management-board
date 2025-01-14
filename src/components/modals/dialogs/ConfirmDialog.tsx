@@ -1,6 +1,6 @@
 'use client';
 
-import { Modal } from '../base/Modal';
+import { Modal } from '@/components/modals/base/Modal';
 
 interface ConfirmDialogProps {
   isOpen: boolean;

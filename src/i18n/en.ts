@@ -1,47 +1,37 @@
 export const en = {
   common: {
-    search: "Search tasks...",
-    allUsers: "All Users",
-    filters: "Filters",
-    new: "New",
-    edit: "Edit",
+    create: "Create",
+    update: "Update",
     delete: "Delete",
     cancel: "Cancel",
     save: "Save",
-    update: "Update",
-    create: "Create"
+    close: "Close",
+    confirm: "Confirm",
+    allUsers: "All Users",
+    search: "Search tasks...",
+    filters: "Filters"
   },
-  export: {
-    button: "Export",
-    json: "Download as JSON",
-    excel: "Download as Excel",
-    pdf: "Download as PDF"
-  },
-  shortcuts: {
-    title: "Keyboard Shortcuts",
-    newTask: "Create new task",
-    closeModal: "Close modal",
-    newUser: "Create new user"
-  },
-  board: {
-    newTask: "New Task",
-    addTask: "Add",
-    dropHere: "Drop task here",
-    taskCount: "Task Count",
-    storyPoints: "Story Points",
-    projectStats: "Project Statistics",
-    totalTasks: "Total Tasks",
-    totalPoints: "Total Story Points",
-    progress: "Progress"
+  dialog: {
+    confirmTitle: "Are you sure?",
+    confirmMessage: "Are you sure you want to perform this action?"
   },
   task: {
+    new: "New Task",
+    edit: "Edit Task",
     title: "Title",
     description: "Description",
     assignee: "Assignee",
     startDate: "Start Date",
     endDate: "End Date",
+    storyPoints: "Story Points",
+    deleteConfirm: "Are you sure you want to delete this task?",
     status: "Status",
-    deleteConfirm: "Are you sure you want to delete this task?"
+    priority: {
+      title: "Priority",
+      HIGH: "High",
+      MEDIUM: "Medium",
+      LOW: "Low"
+    }
   },
   status: {
     open: "Open",
@@ -56,33 +46,53 @@ export const en = {
     DONE: "Done"
   },
   home: {
-    title: "Task Management System",
-    description: "Manage your projects easily with a modern and user-friendly interface",
+    title: "Task Management",
+    description: "Manage your tasks easily",
     goToBoard: "Go to Board",
     learnMore: "Learn More",
     features: {
       teamManagement: {
         title: "Team Management",
-        description: "Easily manage team members and assign tasks"
+        description: "Manage your team effectively"
       },
       taskTracking: {
         title: "Task Tracking",
-        description: "Manage tasks easily with drag and drop"
+        description: "Track your tasks in real-time"
       },
       statistics: {
         title: "Statistics",
-        description: "Track project progress with detailed graphs"
+        description: "View detailed project statistics"
       }
     }
+  },
+  board: {
+    dropHere: "Drop here",
+    taskCount: "Task Count",
+    storyPoints: "Story Points",
+    projectStats: "Project Statistics",
+    totalTasks: "Total Tasks",
+    totalPoints: "Total Points",
+    progress: "Progress",
+    newTask: "New Task",
+    addTask: "Add Task"
+  },
+  shortcuts: {
+    title: "Keyboard Shortcuts",
+    newTask: "Create new task",
+    newUser: "Create new user",
+    closeModal: "Close modal"
+  },
+  export: {
+    button: "Export",
+    json: "Export as JSON",
+    excel: "Export as Excel",
+    pdf: "Export as PDF"
   },
   tags: {
     Bug: "Bug",
     Feature: "Feature",
     Documentation: "Documentation",
     Enhancement: "Enhancement",
-    Design: "Design",
-    HIGH: "High Priority",
-    MEDIUM: "Medium Priority",
-    LOW: "Low Priority"
+    Design: "Design"
   }
 }; 

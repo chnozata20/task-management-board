@@ -1,5 +1,5 @@
-import { Board } from '../../components/board/Board';
-import { BoardProvider } from '../../context/BoardContext';
+import { Board } from '@/components/board/Board';
+import { BoardProvider } from '@/context/BoardContext';
 
 export default function BoardPage() {
   return (

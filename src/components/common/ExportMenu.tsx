@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../../context/LanguageContext';
-import { useBoardContext } from '../../context/BoardContext';
+import { useLanguage } from '@/context/LanguageContext';
+import { useBoardContext } from '@/context/BoardContext';
 
 export const ExportMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

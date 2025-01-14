@@ -1,88 +1,98 @@
 export const tr = {
   common: {
-    search: "Task ara...",
-    allUsers: "Tüm Kullanıcılar",
-    filters: "Filtreler",
-    new: "Yeni",
-    edit: "Düzenle",
-    delete: "Sil",
-    cancel: "İptal",
-    save: "Kaydet",
-    update: "Güncelle",
-    create: "Oluştur"
+    create: 'Oluştur',
+    update: 'Güncelle',
+    delete: 'Sil',
+    cancel: 'İptal',
+    save: 'Kaydet',
+    close: 'Kapat',
+    confirm: 'Onayla',
+    allUsers: 'Tüm Kullanıcılar',
+    search: 'Görev ara...',
+    filters: 'Filtreler',
   },
-  export: {
-    button: "Dışa Aktar",
-    json: "JSON olarak indir",
-    excel: "Excel olarak indir",
-    pdf: "PDF olarak indir"
-  },
-  shortcuts: {
-    title: "Klavye Kısayolları",
-    newTask: "Yeni task oluştur",
-    closeModal: "Modalı kapat",
-    newUser: "Yeni kullanıcı oluştur"
-  },
-  board: {
-    newTask: "Yeni Task",
-    addTask: "Ekle",
-    dropHere: "Task'ı buraya bırakın",
-    taskCount: "Task Sayısı",
-    storyPoints: "Story Points",
-    projectStats: "Proje İstatistikleri",
-    totalTasks: "Toplam Task",
-    totalPoints: "Toplam Story Points",
-    progress: "İlerleme"
+  dialog: {
+    confirmTitle: 'Emin misiniz?',
+    confirmMessage: 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?'
   },
   task: {
-    title: "Başlık",
-    description: "Açıklama",
-    assignee: "Atanan Kişi",
-    startDate: "Başlangıç Tarihi",
-    endDate: "Bitiş Tarihi",
-    status: "Durum",
-    deleteConfirm: "Bu task'ı silmek istediğinizden emin misiniz?"
+    new: 'Yeni Görev',
+    edit: 'Görevi Düzenle',
+    title: 'Başlık',
+    description: 'Açıklama',
+    assignee: 'Atanan Kişi',
+    startDate: 'Başlangıç Tarihi',
+    endDate: 'Bitiş Tarihi',
+    storyPoints: 'Hikaye Puanı',
+    deleteConfirm: 'Bu görevi silmek istediğinizden emin misiniz?',
+    status: 'Durum',
+    priority: {
+      title: 'Öncelik',
+      HIGH: 'Yüksek',
+      MEDIUM: 'Orta',
+      LOW: 'Düşük'
+    }
   },
   status: {
-    open: "Açık",
-    inProgress: "Devam Ediyor",
-    inReview: "İncelemede",
-    done: "Tamamlandı"
+    open: 'Açık',
+    inProgress: 'Devam Ediyor',
+    inReview: 'İncelemede',
+    done: 'Tamamlandı'
   },
   columnTitles: {
-    OPEN: "Açık",
-    IN_PROGRESS: "Devam Ediyor",
-    IN_REVIEW: "İncelemede",
-    DONE: "Tamamlandı"
+    OPEN: 'Açık',
+    IN_PROGRESS: 'Devam Ediyor',
+    IN_REVIEW: 'İncelemede',
+    DONE: 'Tamamlandı'
   },
   home: {
-    title: "Task Yönetim Sistemi",
-    description: "Modern ve kullanıcı dostu arayüz ile projelerinizi kolayca yönetin",
-    goToBoard: "Board'a Git",
-    learnMore: "Daha Fazla Bilgi",
+    title: 'Görev Yönetimi',
+    description: 'Görevlerinizi kolayca yönetin',
+    goToBoard: 'Panoya Git',
+    learnMore: 'Daha Fazla Bilgi',
     features: {
       teamManagement: {
-        title: "Takım Yönetimi",
-        description: "Ekip üyelerinizi kolayca yönetin ve görevleri atayın"
+        title: 'Takım Yönetimi',
+        description: 'Takımınızı etkili bir şekilde yönetin'
       },
       taskTracking: {
-        title: "İş Takibi",
-        description: "Görevleri sürükle-bırak ile kolayca yönetin"
+        title: 'Görev Takibi',
+        description: 'Görevlerinizi gerçek zamanlı takip edin'
       },
       statistics: {
-        title: "İstatistikler",
-        description: "Proje ilerlemesini detaylı grafiklerle takip edin"
+        title: 'İstatistikler',
+        description: 'Detaylı proje istatistiklerini görüntüleyin'
       }
     }
   },
+  board: {
+    dropHere: 'Buraya bırak',
+    taskCount: 'Görev Sayısı',
+    storyPoints: 'Hikaye Puanı',
+    projectStats: 'Proje İstatistikleri',
+    totalTasks: 'Toplam Görev',
+    totalPoints: 'Toplam Puan',
+    progress: 'İlerleme',
+    newTask: 'Yeni Görev',
+    addTask: 'Görev Ekle'
+  },
+  shortcuts: {
+    title: 'Klavye Kısayolları',
+    newTask: 'Yeni görev oluştur',
+    newUser: 'Yeni kullanıcı oluştur',
+    closeModal: 'Modalı kapat'
+  },
+  export: {
+    button: 'Dışa Aktar',
+    json: 'JSON olarak dışa aktar',
+    excel: 'Excel olarak dışa aktar',
+    pdf: 'PDF olarak dışa aktar'
+  },
   tags: {
-    Bug: "Hata",
-    Feature: "Özellik",
-    Documentation: "Dokümantasyon",
-    Enhancement: "İyileştirme",
-    Design: "Tasarım",
-    HIGH: "Yüksek Öncelik",
-    MEDIUM: "Orta Öncelik",
-    LOW: "Düşük Öncelik"
+    Bug: 'Hata',
+    Feature: 'Özellik',
+    Documentation: 'Dokümantasyon',
+    Enhancement: 'İyileştirme',
+    Design: 'Tasarım'
   }
 }; 

@@ -1,9 +1,9 @@
 'use client';
 
-import { Modal } from '../base/Modal';
+import { Modal } from '@/components/modals/base/Modal';
 import { Task } from '@/types';
 import { useBoardContext } from '@/context/BoardContext';
-import { TaskForm } from './TaskForm';
+import { TaskForm } from '@/components/modals/task/TaskForm';
 
 interface TaskModalProps {
   isOpen: boolean;

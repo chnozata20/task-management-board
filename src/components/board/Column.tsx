@@ -2,10 +2,10 @@
 
 import { DroppableProvided } from '@hello-pangea/dnd';
 import { Column as ColumnInterface } from '@/types';
-import { Task } from './Task';
+import { Task } from '@/components/board/Task';
 import { useLanguage } from '@/context/LanguageContext';
-import { LoadingState } from '../common/LoadingState';
-import { Tooltip } from '../common/Tooltip';
+import { LoadingState } from '@/components/common/LoadingState';
+import { Tooltip } from '@/components/common/Tooltip';
 
 interface ColumnProps {
   column: ColumnInterface;

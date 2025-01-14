@@ -3,8 +3,8 @@
 import { Draggable } from '@hello-pangea/dnd';
 import { Task as TaskType } from '@/types';
 import { useState } from 'react';
-import { TaskModal } from '../modals/task/TaskModal';
-import { Tooltip } from '../common/Tooltip';
+import { TaskModal } from '@/components/modals/task/TaskModal';
+import { Tooltip } from '@/components/common/Tooltip';
 import { useLanguage } from '@/context/LanguageContext';
 
 interface TaskProps {

@@ -3,19 +3,19 @@
 import { useState, useMemo, useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
 import { useBoardContext } from '@/context/BoardContext';
-import { Column as ColumnComponent } from './Column';
+import { Column as ColumnComponent } from '@/components/board/Column';
 import { ColumnType, Task, Column } from '@/types';
-import { TaskModal } from '../modals/task/TaskModal';
-import { UserAvatarList } from '../users/UserAvatarList';
-import { SearchBar } from '../search/SearchBar';
-import { BoardStats } from './BoardStats';
+import { TaskModal } from '@/components/modals/task/TaskModal';
+import { UserAvatarList } from '@/components/users/UserAvatarList';
+import { SearchBar } from '@/components/search/SearchBar';
+import { BoardStats } from '@/components/board/BoardStats';
 import { useLanguage } from '@/context/LanguageContext';
-import { LanguageSwitch } from '../common/LanguageSwitch';
-import { ThemeSwitch } from '../common/ThemeSwitch';
+import { LanguageSwitch } from '@/components/common/LanguageSwitch';
+import { ThemeSwitch } from '@/components/common/ThemeSwitch';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
-import { KeyboardShortcuts } from '../common/KeyboardShortcuts';
-import { UserModal } from '../modals/user/UserModal';
-import { ExportMenu } from '../common/ExportMenu';
+import { KeyboardShortcuts } from '@/components/common/KeyboardShortcuts';
+import { UserModal } from '@/components/modals/user/UserModal';
+import { ExportMenu } from '@/components/common/ExportMenu';
 
 export function Board() {
   const { columns: originalColumns, updateTaskStatus } = useBoardContext();

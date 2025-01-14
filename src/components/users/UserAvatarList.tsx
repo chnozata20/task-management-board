@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useBoardContext } from '../../context/BoardContext';
-import { UserModal } from '../modals/user/UserModal';
+import { useBoardContext } from '@/context/BoardContext';
+import { UserModal } from '@/components/modals/user/UserModal';
 
 export function UserAvatarList() {
   const { users } = useBoardContext();

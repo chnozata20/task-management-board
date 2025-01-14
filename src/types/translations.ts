@@ -2,18 +2,23 @@ import type { ColumnType } from '@/types/column';
 
 type TranslationString = string;
 
-type CommonTranslations = {
-  search: TranslationString;
-  allUsers: TranslationString;
-  filters: TranslationString;
-  new: TranslationString;
-  edit: TranslationString;
-  delete: TranslationString;
-  cancel: TranslationString;
-  save: TranslationString;
-  update: TranslationString;
-  create: TranslationString;
-};
+export interface CommonTranslations {
+  create: string;
+  update: string;
+  delete: string;
+  cancel: string;
+  save: string;
+  close: string;
+  confirm: string;
+  allUsers: string;
+  search: string;
+  filters: string;
+}
+
+export interface DialogTranslations {
+  confirmTitle: string;
+  confirmMessage: string;
+}
 
 type ExportTranslations = {
   button: TranslationString;
@@ -49,6 +54,15 @@ type TaskTranslations = {
   endDate: TranslationString;
   status: TranslationString;
   deleteConfirm: TranslationString;
+  new: TranslationString;
+  edit: TranslationString;
+  storyPoints: TranslationString;
+  priority: {
+    title: TranslationString;
+    HIGH: TranslationString;
+    MEDIUM: TranslationString;
+    LOW: TranslationString;
+  };
 };
 
 type StatusTranslations = {
@@ -77,6 +91,7 @@ type HomeTranslations = {
 
 export interface Translations {
   common: CommonTranslations;
+  dialog: DialogTranslations;
   export: ExportTranslations;
   shortcuts: ShortcutTranslations;
   board: BoardTranslations;

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { useBoardContext } from '../../context/BoardContext';
-import { useLanguage } from '../../context/LanguageContext';
-import { Tooltip } from '../common/Tooltip';
+import { useBoardContext } from '@/context/BoardContext';
+import { useLanguage } from '@/context/LanguageContext';
+import { Tooltip } from '@/components/common/Tooltip';
 
 interface SearchBarProps {
   onSearch: (searchTerm: string) => void;

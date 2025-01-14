@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState } from 'react';
-import { en } from '../i18n/en';
-import { tr } from '../i18n/tr';
+import { en } from '@/i18n/en';
+import { tr } from '@/i18n/tr';
 import type { Translations } from '@/types/translations';
 
 type Language = 'en' | 'tr';
