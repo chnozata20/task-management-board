@@ -2,6 +2,9 @@
 
 Modern ve kullanıcı dostu bir görev yönetim uygulaması.
 
+## 🌐 Demo
+Canlı demo için: [http://16.170.229.196/](http://16.170.229.196/)
+
 ## 🚀 Özellikler
 
 ### 📋 Görev Yönetimi
@@ -102,6 +105,7 @@ Modern ve kullanıcı dostu bir görev yönetim uygulaması.
 
 ## 💻 Kurulum
 
+### Yerel Geliştirme
 1. Repoyu klonlayın:
 ```bash
 git clone https://github.com/yourusername/task-management-board.git
@@ -125,6 +129,67 @@ yarn dev
 4. Tarayıcınızda açın:
 ```
 http://localhost:3000
+```
+
+### 🐳 Docker ile Kurulum
+
+#### Yerel Ortamda Docker ile Çalıştırma
+1. Docker image'ını oluşturun:
+```bash
+docker build -t task-management-board .
+```
+
+2. Container'ı çalıştırın:
+```bash
+docker-compose up -d
+```
+
+3. Uygulamaya erişin:
+```
+http://localhost:3000
+```
+
+#### Production Ortamında Çalıştırma
+1. Docker Hub'dan image'ı çekin:
+```bash
+docker pull chnozatax/task-management-board:latest
+```
+
+2. Production yapılandırma dosyalarını hazırlayın:
+```bash
+# .env dosyası oluşturun
+echo "DOCKER_HUB_USERNAME=chnozatax" > .env
+
+# docker-compose.prod.yml ve nginx.conf dosyalarını kopyalayın
+```
+
+3. Uygulamayı başlatın:
+```bash
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+4. Logları kontrol edin:
+```bash
+docker-compose -f docker-compose.prod.yml logs -f
+```
+
+#### Docker Komutları
+```bash
+# Container'ları görüntüle
+docker ps
+
+# Container loglarını görüntüle
+docker logs task-management-board
+
+# Container'ı durdur
+docker-compose down
+
+# Image'ları güncelle
+docker-compose pull
+docker-compose up -d
+
+# Tüm container ve image'ları temizle
+docker system prune -a
 ```
 
 ## 🤝 Katkıda Bulunma
