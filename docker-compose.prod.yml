@@ -2,10 +2,7 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: task-management-board:latest
+    image: ${DOCKER_HUB_USERNAME}/task-management-board:latest
     container_name: task-management-board
     restart: always
     environment:

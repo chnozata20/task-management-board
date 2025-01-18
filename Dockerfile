@@ -1,5 +1,5 @@
 # Base image - Build aşaması
-FROM node:20-alpine AS builder
+FROM --platform=$TARGETPLATFORM node:20-alpine AS builder
 
 # Güvenlik için root olmayan kullanıcı oluştur
 RUN addgroup -g 1001 -S nodejs
@@ -21,7 +21,7 @@ COPY . .
 RUN npm run build
 
 # Üretim aşaması
-FROM node:20-alpine AS runner
+FROM --platform=$TARGETPLATFORM node:20-alpine AS runner
 
 # Güvenlik için root olmayan kullanıcı oluştur
 RUN addgroup -g 1001 -S nodejs
@@ -30,10 +30,10 @@ RUN adduser -S nextjs -u 1001
 WORKDIR /app
 
 # Sadece gerekli dosyaları kopyala
-COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 
 # Ortam değişkenlerini ayarla
 ENV NODE_ENV=production
