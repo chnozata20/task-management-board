@@ -1,0 +1,16 @@
+{
+  "tooltip": {
+    "show": "İpuçlarını Göster",
+    "hide": "İpuçlarını Gizle",
+    "enabled": "İpuçları Açık",
+    "disabled": "İpuçları Kapalı"
+  },
+  "tour": {
+    "back": "Geri",
+    "close": "Kapat",
+    "finish": "Bitir",
+    "next": "İleri",
+    "skip": "Geç",
+    "start": "Turu Başlat"
+  }
+} 

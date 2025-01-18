@@ -20,8 +20,13 @@ const translations = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('tr');
+interface LanguageProviderProps {
+  children: React.ReactNode;
+  locale: string;
+}
+
+export function LanguageProvider({ children, locale }: LanguageProviderProps) {
+  const [language, setLanguage] = useState<Language>(locale as Language);
 
   const changeLanguage = (lang: Language) => {
     setLanguage(lang);

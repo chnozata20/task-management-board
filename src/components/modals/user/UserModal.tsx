@@ -5,6 +5,7 @@ import { Modal } from '@/components/modals/base/Modal';
 import { useLanguage } from '@/context/LanguageContext';
 import { User } from '@/types';
 import { useBoardContext } from '@/context/BoardContext';
+import { v4 as uuidv4 } from 'uuid';
 
 interface UserModalProps {
   isOpen: boolean;
@@ -22,10 +23,12 @@ export function UserModal({ isOpen, onClose, user }: UserModalProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const userAvatar = avatar.trim() || `https://robohash.org/${encodeURIComponent(name)}.png`;
+
     const userData = {
-      id: user?.id || crypto.randomUUID(),
+      id: user?.id || uuidv4(),
       name,
-      avatar
+      avatar: userAvatar
     };
 
     if (user) {
@@ -75,7 +78,6 @@ export function UserModal({ isOpen, onClose, user }: UserModalProps) {
               border border-jira-border-light dark:border-jira-border-dark 
               text-jira-text-primary-light dark:text-jira-text-primary-dark 
               focus:border-jira-primary-light focus:ring-1 focus:ring-jira-primary-light/20"
-            required
           />
         </div>
 

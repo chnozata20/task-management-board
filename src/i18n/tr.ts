@@ -89,10 +89,33 @@ export const tr = {
     pdf: 'PDF olarak dışa aktar'
   },
   tooltip: {
-    show: 'İpuçlarını Göster',
-    hide: 'İpuçlarını Gizle',
-    enabled: 'İpuçları Açık',
-    disabled: 'İpuçları Kapalı'
+    show: "İpuçlarını Göster",
+    hide: "İpuçlarını Gizle",
+    enabled: "İpuçları Açık",
+    disabled: "İpuçları Kapalı"
+  },
+  tour: {
+    back: "Geri",
+    close: "Kapat",
+    finish: "Bitir",
+    next: "İleri",
+    skip: "Geç",
+    start: "Turu Başlat",
+    steps: {
+      board: 'Görev panonuz. Tüm görevlerinizi burada yönetebilirsiniz.',
+      newTask: 'Yeni görev eklemek için bu butonu kullanın. Kısayol: Ctrl/Cmd + N',
+      userAvatars: 'Ekip üyeleriniz burada görünür. Yeni üye ekleyebilir veya mevcut üyeleri düzenleyebilirsiniz.',
+      searchBar: 'Görevleri başlık veya açıklamalarına göre arayabilirsiniz.',
+      columnOpen: 'Yeni eklenen görevler "Open" sütununda başlar.',
+      columnInProgress: 'Üzerinde çalışılan görevler "In Progress" sütununa taşınır.',
+      columnInReview: 'Tamamlanan görevler inceleme için "In Review" sütununa alınır.',
+      columnDone: 'Onaylanan görevler "Done" sütununa taşınır.',
+      tooltipToggle: 'İpuçlarını bu buton ile açıp kapatabilirsiniz.',
+      themeSwitch: 'Karanlık/Aydınlık tema tercihini buradan değiştirebilirsiniz.',
+      languageSwitch: 'Dil seçiminizi buradan yapabilirsiniz.',
+      exportMenu: 'Görevlerinizi farklı formatlarda dışa aktarabilirsiniz.',
+      boardStats: 'Görev ve kullanıcı istatistiklerini buradan takip edebilirsiniz.'
+    }
   },
   tags: {
     title: "Etiketler",
@@ -102,4 +125,4 @@ export const tr = {
     Enhancement: "İyileştirme",
     Design: "Tasarım"
   }
-}; 
+} as const; 

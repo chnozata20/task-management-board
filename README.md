@@ -10,17 +10,24 @@ Modern ve kullanıcı dostu bir görev yönetim uygulaması.
 - Görev önceliklendirme (Yüksek, Orta, Düşük)
 - Görev etiketleri (Bug, Feature, Enhancement, Documentation, Design)
 - Story point değerlendirme sistemi
+- Görev durumunu hızlıca değiştirme
+- Toplu görev düzenleme
 
 ### 👥 Kullanıcı Yönetimi
 - Kullanıcı ekleme/düzenleme/silme
 - Kullanıcı avatarları
 - Görevlere kullanıcı atama
+- Kullanıcı rollerini yönetme
+- Kullanıcı aktivite geçmişi
 
 ### 📊 Board Özellikleri
 - 4 farklı durum sütunu (Open, In Progress, In Review, Done)
 - Sütunlarda görev limiti ve scroll özelliği
 - Görev filtreleme ve arama
 - Atanan kişiye göre filtreleme
+- Sütun başlıklarını özelleştirme
+- Sütun renklerini özelleştirme
+- Görev sayısı göstergeleri
 
 ### 🎨 Arayüz Özellikleri
 - Modern ve temiz tasarım
@@ -29,11 +36,16 @@ Modern ve kullanıcı dostu bir görev yönetim uygulaması.
 - İpuçları (tooltips) ile kolay kullanım
 - İpuçlarını açma/kapama özelliği
 - Özelleştirilmiş scrollbar tasarımı
+- Etkileşimli tur rehberi
+- Gelişmiş animasyonlar
+- Mini-map görünümü
 
 ### 🌐 Dil Desteği
 - Çoklu dil desteği
 - Türkçe/İngilizce dil seçeneği
 - Kolay dil değiştirme
+- Otomatik dil algılama
+- RTL desteği
 
 ### ⌨️ Klavye Kısayolları
 - Yeni görev ekleme (Ctrl/Cmd + N)
@@ -49,11 +61,19 @@ Modern ve kullanıcı dostu bir görev yönetim uygulaması.
 - Görev durumlarına göre dağılım
 - Kullanıcı bazlı görev dağılımı
 - Öncelik seviyelerine göre dağılım
+- Gerçek zamanlı metrikler
+- Performans göstergeleri
+- Sprint istatistikleri
+- Burndown grafikleri
 
 ### 🔍 Arama ve Filtreleme
 - Görev başlığı ve açıklamasında arama
 - Atanan kişiye göre filtreleme
 - Etiketlere göre filtreleme
+- Gelişmiş arama operatörleri
+- Arama geçmişi
+- Kayıtlı filtreler
+- Hızlı filtre önerileri
 
 ### 🎯 Erişilebilirlik
 - ARIA etiketleri ile erişilebilirlik desteği

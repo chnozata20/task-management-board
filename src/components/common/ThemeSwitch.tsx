@@ -7,6 +7,7 @@ export function ThemeSwitch() {
 
   return (
     <button
+      data-testid="theme-switch"
       onClick={toggleTheme}
       className="p-2 rounded-lg 
         bg-jira-bg-card-light dark:bg-jira-bg-card-dark

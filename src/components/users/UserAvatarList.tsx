@@ -11,7 +11,7 @@ export function UserAvatarList() {
   return (
     <>
       <div className="flex items-center">
-        <div className="flex -space-x-2 overflow-hidden">
+        <div className="flex -space-x-2 overflow-hidden" data-testid="user-avatar-list">
           {users.map((user) => (
             <div
               key={user.id}

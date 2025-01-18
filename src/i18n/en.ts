@@ -101,5 +101,28 @@ export const en = {
     Documentation: "Documentation",
     Enhancement: "Enhancement",
     Design: "Design"
+  },
+  tour: {
+    back: "Back",
+    close: "Close",
+    finish: "Finish",
+    next: "Next",
+    skip: "Skip",
+    start: "Start Tour",
+    steps: {
+      board: "Your task board. You can manage all your tasks here.",
+      newTask: "Use this button to add a new task. Shortcut: Ctrl/Cmd + N",
+      userAvatars: "Your team members appear here. You can add new members or edit existing ones.",
+      searchBar: "Search tasks by title or description.",
+      columnOpen: "New tasks start in the 'Open' column.",
+      columnInProgress: "Tasks being worked on move to the 'In Progress' column.",
+      columnInReview: "Completed tasks are moved to 'In Review' for review.",
+      columnDone: "Approved tasks are moved to the 'Done' column.",
+      tooltipToggle: "Toggle tooltips on/off with this button.",
+      themeSwitch: "Change between Dark/Light theme here.",
+      languageSwitch: "Change your language preference here.",
+      exportMenu: "Export your tasks in different formats.",
+      boardStats: "Track task and user statistics here."
+    }
   }
-}; 
+} as const; 

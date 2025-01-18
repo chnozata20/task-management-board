@@ -98,6 +98,22 @@ type TagTranslations = {
   Design: TranslationString;
 };
 
+type TourStepTranslations = {
+  board: TranslationString;
+  newTask: TranslationString;
+  userAvatars: TranslationString;
+  searchBar: TranslationString;
+  columnOpen: TranslationString;
+  columnInProgress: TranslationString;
+  columnInReview: TranslationString;
+  columnDone: TranslationString;
+  tooltipToggle: TranslationString;
+  themeSwitch: TranslationString;
+  languageSwitch: TranslationString;
+  exportMenu: TranslationString;
+  boardStats: TranslationString;
+};
+
 export interface Translations {
   common: CommonTranslations;
   dialog: DialogTranslations;
@@ -114,5 +130,14 @@ export interface Translations {
     hide: string;
     enabled: string;
     disabled: string;
+  };
+  tour: {
+    back: string;
+    close: string;
+    finish: string;
+    next: string;
+    skip: string;
+    start: string;
+    steps: TourStepTranslations;
   };
 } 

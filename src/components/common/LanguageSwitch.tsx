@@ -7,6 +7,7 @@ export function LanguageSwitch() {
 
   return (
     <button
+      data-testid="language-switch"
       onClick={() => changeLanguage(language === 'tr' ? 'en' : 'tr')}
       className="px-2 py-1 text-sm rounded-lg 
         bg-jira-bg-card-light dark:bg-jira-bg-card-dark

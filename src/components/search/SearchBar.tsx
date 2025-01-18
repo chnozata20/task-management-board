@@ -28,7 +28,7 @@ export function SearchBar({ onSearch, onAssigneeFilter }: SearchBarProps) {
   };
 
   return (
-    <div className="relative flex flex-col sm:flex-row gap-3">
+    <div className="relative flex flex-col sm:flex-row gap-3" data-testid="search-bar">
       {/* Arama Çubuğu */}
       <div className="relative flex-1">
         <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">

@@ -11,6 +11,7 @@ export function TooltipToggle() {
   return (
     <Tooltip text={showTooltips ? t.tooltip.hide : t.tooltip.show}>
       <button
+        data-testid="tooltip-toggle-button"
         onClick={toggleTooltips}
         className={`px-2 py-1 text-sm rounded-lg 
           border transition-all duration-200

@@ -65,7 +65,7 @@ export const ExportMenu: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" data-testid="export-menu">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="px-3 py-1.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 
