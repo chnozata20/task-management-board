@@ -203,3 +203,33 @@ docker system prune -a
 ## 📝 Lisans
 
 Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına bakın.
+
+## �� Güvenlik Önlemleri
+
+Uygulama, çeşitli güvenlik önlemleri içermektedir:
+
+### Middleware Güvenlik Katmanı
+- **Helmet**: Temel güvenlik başlıklarını otomatik olarak ekler
+  - XSS koruması
+  - Content Security Policy (CSP)
+  - HSTS (HTTP Strict Transport Security)
+  - Clickjacking koruması
+  - ve diğer güvenlik başlıkları
+
+- **Rate Limiting**: API isteklerini sınırlandırarak DDoS saldırılarına karşı koruma
+  - Her IP için dakikada maksimum 100 istek
+  - Limit aşıldığında 429 (Too Many Requests) hatası
+
+- **CORS (Cross-Origin Resource Sharing)**:
+  - Sadece güvenilir domainlerden gelen isteklere izin verir
+  - Özel CORS politikası ile güvenli cross-origin iletişimi
+
+- **Request Validation**:
+  - Gelen isteklerin boyut sınırlaması (10mb)
+  - JSON body parsing güvenliği
+  - Input sanitization
+
+### Diğer Güvenlik Önlemleri
+- Docker container'ları non-root kullanıcı ile çalışır
+- Hassas bilgiler environment variable'lar ile yönetilir
+- Düzenli güvenlik güncellemeleri
