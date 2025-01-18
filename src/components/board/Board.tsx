@@ -49,7 +49,8 @@ export function Board() {
 
     const { destination, source, draggableId } = result;
     if (!destination) return;
-    if (destination.droppableId === source.droppableId && destination.index === source.index) return;
+    
+    if (destination.droppableId === source.droppableId) return;
 
     updateTaskStatus(
       draggableId,
