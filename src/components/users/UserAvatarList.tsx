@@ -21,7 +21,7 @@ export function UserAvatarList() {
               <img
                 src={user.avatar}
                 alt={user.name}
-                className="h-8 w-8 rounded-full ring-2 ring-jira-bg-light dark:ring-jira-bg-dark hover:z-10 transition-all"
+                className="h-8 w-8 rounded-full dark:ring-jira-bg-dark hover:z-10 transition-all"
               />
               <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 
                 bg-jira-text-primary dark:bg-jira-bg-dark-hover text-white text-xs rounded 

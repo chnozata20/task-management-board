@@ -4,6 +4,9 @@ import { Modal } from '@/components/modals/base/Modal';
 import { Task } from '@/types';
 import { useBoardContext } from '@/context/BoardContext';
 import { TaskForm } from '@/components/modals/task/TaskForm';
+import { useState } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
+import { ConfirmDialog } from '@/components/modals/dialogs/ConfirmDialog';
 
 interface TaskModalProps {
   isOpen: boolean;
@@ -13,6 +16,8 @@ interface TaskModalProps {
 
 export function TaskModal({ isOpen, onClose, task }: TaskModalProps) {
   const { addTask, updateTask, deleteTask } = useBoardContext();
+  const { t } = useLanguage();
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
   const handleSubmit = (taskData: Omit<Task, 'id'>) => {
     if (task) {
@@ -24,20 +29,35 @@ export function TaskModal({ isOpen, onClose, task }: TaskModalProps) {
   };
 
   const handleDelete = () => {
+    setIsConfirmDialogOpen(true);
+  };
+
+  const confirmDelete = () => {
     if (task) {
       deleteTask(task.id);
+      setIsConfirmDialogOpen(false);
       onClose();
     }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <TaskForm
-        task={task}
-        onSubmit={handleSubmit}
-        onDelete={task ? handleDelete : undefined}
-        onCancel={onClose}
+    <>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <TaskForm
+          task={task}
+          onSubmit={handleSubmit}
+          onDelete={task ? handleDelete : undefined}
+          onCancel={onClose}
+        />
+      </Modal>
+
+      <ConfirmDialog
+        isOpen={isConfirmDialogOpen}
+        onClose={() => setIsConfirmDialogOpen(false)}
+        onConfirm={confirmDelete}
+        title={t.dialog.confirmTitle}
+        message={t.task.deleteConfirm}
       />
-    </Modal>
+    </>
   );
 } 

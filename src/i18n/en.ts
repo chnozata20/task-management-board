@@ -88,7 +88,14 @@ export const en = {
     excel: "Export as Excel",
     pdf: "Export as PDF"
   },
+  tooltip: {
+    show: "Show Tooltips",
+    hide: "Hide Tooltips",
+    enabled: "Tooltips Enabled",
+    disabled: "Tooltips Disabled"
+  },
   tags: {
+    title: "Tags",
     Bug: "Bug",
     Feature: "Feature",
     Documentation: "Documentation",

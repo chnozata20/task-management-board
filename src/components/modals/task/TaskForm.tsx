@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { Task, Priority, Tag, DEFAULT_TAGS } from '@/types';
+import { Task, Priority, DEFAULT_TAGS } from '@/types';
 import { useBoardContext } from '@/context/BoardContext';
+import { useState } from 'react';
 
 interface TaskFormProps {
   task?: Task;
-  onSubmit: (taskData: Omit<Task, 'id'>) => void;
+  onSubmit: (task: Omit<Task, 'id'>) => void;
   onDelete?: () => void;
   onCancel: () => void;
 }
@@ -15,59 +15,65 @@ interface TaskFormProps {
 export function TaskForm({ task, onSubmit, onDelete, onCancel }: TaskFormProps) {
   const { t } = useLanguage();
   const { users } = useBoardContext();
-
-  const [title, setTitle] = useState(task?.title || '');
-  const [description, setDescription] = useState(task?.description || '');
-  const [assigneeId, setAssigneeId] = useState(task?.assignee?.id || '');
-  const [startDate, setStartDate] = useState(task?.startDate || '');
-  const [endDate, setEndDate] = useState(task?.endDate || '');
-  const [storyPoints, setStoryPoints] = useState(task?.storyPoints?.toString() || '');
-  const [priority, setPriority] = useState<Priority>(task?.priority || 'MEDIUM');
-  const [selectedTags, setSelectedTags] = useState<Tag[]>(task?.tags || []);
+  const [selectedPriority, setSelectedPriority] = useState<Priority>(task?.priority || 'MEDIUM');
+  const [selectedTags, setSelectedTags] = useState<string[]>(task?.tags?.map(t => t.name) || []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
-    const assignee = users.find(user => user.id === assigneeId) || null;
+    const assigneeId = formData.get('assignee') as string;
+    const startDate = formData.get('startDate');
+    const endDate = formData.get('endDate');
 
-    onSubmit({
-      title,
-      description,
-      assignee,
-      startDate,
-      endDate,
-      status: task?.status || 'OPEN',
-      storyPoints: parseInt(storyPoints) || 0,
-      priority,
-      tags: selectedTags
-    });
+    const taskData: Omit<Task, 'id'> = {
+      title: formData.get('title') as string,
+      description: (formData.get('description') as string) || '',
+      assignee: assigneeId ? users.find(u => u.id === assigneeId) || null : null,
+      startDate: startDate ? String(startDate) : '',
+      endDate: endDate ? String(endDate) : '',
+      storyPoints: Number(formData.get('storyPoints')),
+      priority: selectedPriority,
+      tags: selectedTags.map(tagName => DEFAULT_TAGS.find(t => t.name === tagName)!),
+      status: task?.status || 'OPEN'
+    };
+
+    onSubmit(taskData);
   };
 
-  const toggleTag = (tag: Tag) => {
+  const handlePriorityChange = (priority: Priority) => {
+    setSelectedPriority(priority);
+  };
+
+  const handleTagToggle = (tagName: string) => {
     setSelectedTags(prev => {
-      const exists = prev.find(t => t.id === tag.id);
-      if (exists) {
-        return prev.filter(t => t.id !== tag.id);
+      if (prev.includes(tagName)) {
+        return prev.filter(t => t !== tagName);
       }
-      return [...prev, tag];
+      return [...prev, tagName];
     });
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <h2 className="text-xl font-semibold text-jira-text-primary-light dark:text-jira-text-primary-dark">
+        {task ? t.task.edit : t.task.new}
+      </h2>
+
       <div>
         <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark">
           {t.task.title}
         </label>
         <input
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          name="title"
+          defaultValue={task?.title}
+          required
           className="mt-1 block w-full px-3 py-2 bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
             border border-jira-border-light dark:border-jira-border-dark 
             text-jira-text-primary-light dark:text-jira-text-primary-dark 
             focus:border-jira-primary-light focus:ring-1 focus:ring-jira-primary-light/20"
-          required
         />
       </div>
 
@@ -76,8 +82,8 @@ export function TaskForm({ task, onSubmit, onDelete, onCancel }: TaskFormProps) 
           {t.task.description}
         </label>
         <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          name="description"
+          defaultValue={task?.description}
           rows={3}
           className="mt-1 block w-full px-3 py-2 bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
             border border-jira-border-light dark:border-jira-border-dark 
@@ -91,8 +97,8 @@ export function TaskForm({ task, onSubmit, onDelete, onCancel }: TaskFormProps) 
           {t.task.assignee}
         </label>
         <select
-          value={assigneeId}
-          onChange={(e) => setAssigneeId(e.target.value)}
+          name="assignee"
+          defaultValue={task?.assignee?.id}
           className="mt-1 block w-full px-3 py-2 bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
             border border-jira-border-light dark:border-jira-border-dark 
             text-jira-text-primary-light dark:text-jira-text-primary-dark 
@@ -107,103 +113,145 @@ export function TaskForm({ task, onSubmit, onDelete, onCancel }: TaskFormProps) 
         </select>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark">
-          Öncelik
-        </label>
-        <div className="mt-2 space-x-4">
-          {(['HIGH', 'MEDIUM', 'LOW'] as Priority[]).map((p) => (
-            <label key={p} className="inline-flex items-center">
-              <input
-                type="radio"
-                name="priority"
-                value={p}
-                checked={priority === p}
-                onChange={(e) => setPriority(e.target.value as Priority)}
-                className="form-radio text-jira-primary-light"
-              />
-              <span className="ml-2 text-sm text-jira-text-primary-light dark:text-jira-text-primary-dark">
-                {t.tags[p]}
-              </span>
-            </label>
-          ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark">
+            {t.task.startDate}
+          </label>
+          <input
+            type="date"
+            name="startDate"
+            defaultValue={task?.startDate || undefined}
+            className="mt-1 block w-full px-3 py-2 bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
+              border border-jira-border-light dark:border-jira-border-dark 
+              text-jira-text-primary-light dark:text-jira-text-primary-dark 
+              focus:border-jira-primary-light focus:ring-1 focus:ring-jira-primary-light/20"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark">
+            {t.task.endDate}
+          </label>
+          <input
+            type="date"
+            name="endDate"
+            defaultValue={task?.endDate || undefined}
+            className="mt-1 block w-full px-3 py-2 bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
+              border border-jira-border-light dark:border-jira-border-dark 
+              text-jira-text-primary-light dark:text-jira-text-primary-dark 
+              focus:border-jira-primary-light focus:ring-1 focus:ring-jira-primary-light/20"
+          />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark mb-2">
-          Etiketler
+        <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark">
+          {t.task.storyPoints}
         </label>
-        <div className="flex flex-wrap gap-2">
-          {DEFAULT_TAGS.map((tag) => (
+        <input
+          type="number"
+          name="storyPoints"
+          defaultValue={task?.storyPoints || 0}
+          min={0}
+          max={100}
+          className="mt-1 block w-full px-3 py-2 bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
+            border border-jira-border-light dark:border-jira-border-dark 
+            text-jira-text-primary-light dark:text-jira-text-primary-dark 
+            focus:border-jira-primary-light focus:ring-1 focus:ring-jira-primary-light/20"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark mb-2">
+          {t.task.priority.title}
+        </label>
+        <div className="flex flex-col gap-2">
+          {(['HIGH', 'MEDIUM', 'LOW'] as Priority[]).map((p, index) => (
             <button
-              key={tag.id}
+              key={p}
               type="button"
-              onClick={() => toggleTag(tag)}
+              onClick={() => handlePriorityChange(p)}
               className={`
-                px-3 py-1 rounded-full text-sm font-medium text-white
-                transition-all duration-200 ease-in-out
-                ${selectedTags.find(t => t.id === tag.id)
-                  ? 'ring-2 ring-offset-2 ring-jira-primary-light'
-                  : 'opacity-60 hover:opacity-100'
+                flex items-center p-2 rounded-lg border cursor-pointer
+                ${selectedPriority === p
+                  ? 'bg-jira-bg-hover-light dark:bg-jira-bg-hover-dark border-jira-primary-light'
+                  : 'border-jira-border-light dark:border-jira-border-dark hover:bg-jira-bg-hover-light dark:hover:bg-jira-bg-hover-dark'
                 }
               `}
-              style={{ backgroundColor: tag.color }}
             >
-              {t.tags[tag.name]}
+              <div className="flex items-center gap-3 flex-1">
+                <div 
+                  className="w-3 h-3 rounded-full"
+                  style={{ 
+                    backgroundColor: p === 'HIGH' ? '#ef4444' : p === 'MEDIUM' ? '#eab308' : '#22c55e'
+                  }}
+                />
+                <span className="text-sm text-jira-text-primary-light dark:text-jira-text-primary-dark flex-1">
+                  {t.task.priority[p]}
+                </span>
+                <div className="flex items-center text-jira-text-secondary-light dark:text-jira-text-secondary-dark">
+                  {index === 0 && (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                  {index === 2 && (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </div>
+              </div>
             </button>
           ))}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark">
-          Story Points
+        <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark mb-2">
+          {t.tags.title}
         </label>
-        <input
-          type="number"
-          value={storyPoints}
-          onChange={(e) => setStoryPoints(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
-            border border-jira-border-light dark:border-jira-border-dark 
-            text-jira-text-primary-light dark:text-jira-text-primary-dark 
-            focus:border-jira-primary-light focus:ring-1 focus:ring-jira-primary-light/20"
-          min="0"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark">
-          {t.task.startDate}
-        </label>
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
-            border border-jira-border-light dark:border-jira-border-dark 
-            text-jira-text-primary-light dark:text-jira-text-primary-dark 
-            focus:border-jira-primary-light focus:ring-1 focus:ring-jira-primary-light/20"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-jira-text-primary-light dark:text-jira-text-primary-dark">
-          {t.task.endDate}
-        </label>
-        <input
-          type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
-            border border-jira-border-light dark:border-jira-border-dark 
-            text-jira-text-primary-light dark:text-jira-text-primary-dark 
-            focus:border-jira-primary-light focus:ring-1 focus:ring-jira-primary-light/20"
-        />
+        <div className="grid grid-cols-2 gap-2">
+          {DEFAULT_TAGS.map((tag) => (
+            <button
+              key={tag.id}
+              type="button"
+              onClick={() => handleTagToggle(tag.name)}
+              className={`
+                flex items-center p-2 rounded-lg border cursor-pointer
+                ${selectedTags.includes(tag.name)
+                  ? 'bg-jira-bg-hover-light dark:bg-jira-bg-hover-dark border-jira-primary-light'
+                  : 'border-jira-border-light dark:border-jira-border-dark hover:bg-jira-bg-hover-light dark:hover:bg-jira-bg-hover-dark'
+                }
+              `}
+            >
+              <div className="flex items-center gap-2 w-full">
+                <div 
+                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: tag.color }}
+                />
+                <span 
+                  className="text-sm flex-1 truncate"
+                  style={{ 
+                    color: tag.color
+                  }}
+                >
+                  {t.tags[tag.name as keyof typeof t.tags]}
+                </span>
+                {selectedTags.includes(tag.name) && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-jira-primary-light flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="flex justify-end gap-2 mt-6 pt-4 border-t border-jira-border-light dark:border-jira-border-dark">
-        {task && onDelete && (
+        {onDelete && (
           <button
             type="button"
             onClick={onDelete}

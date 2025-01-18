@@ -88,11 +88,18 @@ export const tr = {
     excel: 'Excel olarak dışa aktar',
     pdf: 'PDF olarak dışa aktar'
   },
+  tooltip: {
+    show: 'İpuçlarını Göster',
+    hide: 'İpuçlarını Gizle',
+    enabled: 'İpuçları Açık',
+    disabled: 'İpuçları Kapalı'
+  },
   tags: {
-    Bug: 'Hata',
-    Feature: 'Özellik',
-    Documentation: 'Dokümantasyon',
-    Enhancement: 'İyileştirme',
-    Design: 'Tasarım'
+    title: "Etiketler",
+    Bug: "Hata",
+    Feature: "Özellik",
+    Documentation: "Dokümantasyon",
+    Enhancement: "İyileştirme",
+    Design: "Tasarım"
   }
 }; 

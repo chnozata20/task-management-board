@@ -9,9 +9,9 @@ export interface Tag {
 }
 
 export const PRIORITY_COLORS: Record<Priority, string> = {
-  HIGH: '#ef4444',   // Kırmızı
-  MEDIUM: '#eab308', // Sarı
-  LOW: '#22c55e'     // Yeşil
+  HIGH: '#ef4444',   // Red
+  MEDIUM: '#eab308', // Yellow
+  LOW: '#22c55e'     // Green
 };
 
 export interface Task {
@@ -28,9 +28,9 @@ export interface Task {
 }
 
 export const DEFAULT_TAGS: Tag[] = [
-  { id: '1', name: 'Bug', color: '#ef4444' },         // Kırmızı
-  { id: '2', name: 'Feature', color: '#22c55e' },     // Yeşil
-  { id: '3', name: 'Documentation', color: '#3b82f6' },// Mavi
-  { id: '4', name: 'Enhancement', color: '#a855f7' },  // Mor
-  { id: '5', name: 'Design', color: '#ec4899' }       // Pembe
+  { id: '1', name: 'Bug', color: '#ef4444' },         // Red
+  { id: '2', name: 'Feature', color: '#22c55e' },     // Green
+  { id: '3', name: 'Documentation', color: '#3b82f6' },// Blue
+  { id: '4', name: 'Enhancement', color: '#a855f7' },  // Purple
+  { id: '5', name: 'Design', color: '#ec4899' }       // Pink
 ]; 

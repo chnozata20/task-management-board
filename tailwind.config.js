@@ -10,45 +10,45 @@ module.exports = {
     extend: {
       colors: {
         jira: {
-          // Ana renkler
+          // Main colors
           primary: '#0052CC',
           'primary-light': '#4C9AFF',
           'primary-hover': '#0065FF',
           
-          // Arka plan renkleri - Light
+          // Background colors - Light
           'page-light': '#F4F5F7',
           'bg-card-light': '#FFFFFF',
           'bg-hover-light': '#F4F5F7',
           
-          // Arka plan renkleri - Dark
+          // Background colors - Dark
           'page-dark': '#1D1F23',
           'bg-card-dark': '#2D3137',
           'bg-hover-dark': '#383C44',
           
-          // Kenarlık renkleri
+          // Border colors
           'border-light': '#E3E3E380',
           'border-dark': '#404348',
           
-          // Metin renkleri - Light
+          // Text colors - Light
           'text-primary-light': '#172B4D',
           'text-secondary-light': '#5E6C84',
           
-          // Metin renkleri - Dark
+          // Text colors - Dark
           'text-primary-dark': '#FFFFFF',
           'text-secondary-dark': '#A1A7B4',
           
-          // Overlay ve Backdrop renkleri
+          // Overlay and Backdrop colors
           'overlay-light': 'rgba(0, 0, 0, 0.05)',
           'overlay-dark': 'rgba(0, 0, 0, 0.3)',
           'backdrop-dark': 'rgba(23, 43, 77, 0.7)',
           
-          // Durum renkleri
+          // Status colors
           'status-error': '#E34935',
           'status-error-hover': '#C9372C',
           'status-warning': '#FFAB00',
           'status-success': '#36B37E',
           
-          // Gradient renkleri
+          // Gradient colors
           'gradient-start-light': '#F4F5F7',
           'gradient-end-light': '#FFFFFF',
           'gradient-start-dark': '#1D1F23',

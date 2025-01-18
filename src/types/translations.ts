@@ -89,6 +89,15 @@ type HomeTranslations = {
   };
 };
 
+type TagTranslations = {
+  title: TranslationString;
+  Bug: TranslationString;
+  Feature: TranslationString;
+  Documentation: TranslationString;
+  Enhancement: TranslationString;
+  Design: TranslationString;
+};
+
 export interface Translations {
   common: CommonTranslations;
   dialog: DialogTranslations;
@@ -99,5 +108,11 @@ export interface Translations {
   status: StatusTranslations;
   columnTitles: Record<ColumnType, TranslationString>;
   home: HomeTranslations;
-  tags: Record<string, TranslationString>;
+  tags: TagTranslations;
+  tooltip: {
+    show: string;
+    hide: string;
+    enabled: string;
+    disabled: string;
+  };
 } 

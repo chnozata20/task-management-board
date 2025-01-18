@@ -9,18 +9,18 @@ interface UseKeyboardShortcutsProps {
 export function useKeyboardShortcuts({ onEscape, onNewTask, onNewUser }: UseKeyboardShortcutsProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // ESC tuşu modalları kapatır
+      // ESC key closes modals
       if (e.key === 'Escape' && onEscape) {
         onEscape();
       }
       
-      // N tuşu yeni task oluşturur
+      // N key creates a new task
       if (e.key === 'n' && (e.ctrlKey || e.metaKey) && onNewTask) {
         e.preventDefault();
         onNewTask();
       }
 
-      // U tuşu yeni kullanıcı oluşturur
+      // U key creates a new user
       if (e.key === 'u' && (e.ctrlKey || e.metaKey) && onNewUser) {
         e.preventDefault();
         onNewUser();

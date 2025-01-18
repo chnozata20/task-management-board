@@ -1,17 +1,26 @@
+'use client';
+
+import { useTooltip } from '@/context/TooltipContext';
+
 interface TooltipProps {
-  children: React.ReactNode;
   text: string;
+  children: React.ReactNode;
 }
 
-export function Tooltip({ children, text }: TooltipProps) {
+export function Tooltip({ text, children }: TooltipProps) {
+  const { showTooltips } = useTooltip();
+
+  if (!showTooltips) {
+    return <div className="relative group">{children}</div>;
+  }
+
   return (
-    <div className="group relative">
+    <div className="relative group">
       {children}
-      <div className="absolute -top-8 left-1/2 -translate-x-1/2 
-        opacity-0 group-hover:opacity-100 transition-opacity
-        px-2 py-1 rounded bg-jira-bg-card-dark text-white text-xs
-        whitespace-nowrap pointer-events-none z-50"
-      >
+      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 
+        bg-jira-text-primary-light dark:bg-jira-bg-dark-hover text-white text-xs rounded 
+        shadow-jira-sm opacity-0 invisible group-hover:opacity-100 
+        group-hover:visible transition-all whitespace-nowrap z-50">
         {text}
       </div>
     </div>

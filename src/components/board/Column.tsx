@@ -23,14 +23,14 @@ export function Column({ column, provided, isLoading = false }: ColumnProps) {
       className="bg-jira-bg-card-light dark:bg-jira-bg-card-dark rounded-lg 
         shadow-jira-sm dark:shadow-jira-dark-sm 
         border border-jira-border-light dark:border-jira-border-dark 
-        min-h-[500px] flex flex-col group/column 
+        min-h-[540px] flex flex-col group/column 
         transition-all duration-200 ease-in-out
         hover:shadow-jira-md dark:hover:shadow-jira-dark-md
-        animate-fade-in"
+        animate-fade-in h-[540px]"
     >
       <div className="p-3 border-b border-jira-border-light dark:border-jira-border-dark 
         bg-gradient-to-r from-jira-gradient-start-light to-jira-gradient-end-light 
-        dark:from-jira-gradient-start-dark dark:to-jira-gradient-end-dark">
+        dark:from-jira-gradient-start-dark dark:to-jira-gradient-end-dark rounded-t-lg">
         <div className="flex items-center justify-between">
           <h2 className="text-jira-text-primary-light dark:text-jira-text-primary-dark text-[15px] font-medium flex items-center gap-2">
             {t.columnTitles[column.title]}
@@ -57,7 +57,7 @@ export function Column({ column, provided, isLoading = false }: ColumnProps) {
         </div>
       </div>
       
-      <div className="p-2 flex-1 space-y-2 bg-jira-overlay-light dark:bg-jira-overlay-dark">
+      <div className="p-2 flex-1 space-y-2 bg-jira-overlay-light dark:bg-jira-overlay-dark overflow-y-auto">
         {isLoading ? (
           <div className="p-3">
             <LoadingState />

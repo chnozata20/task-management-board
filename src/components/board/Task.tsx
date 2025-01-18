@@ -54,7 +54,7 @@ export function Task({ task, index }: TaskProps) {
                 {task.title}
               </h3>
               <div className="flex items-center gap-2">
-                <Tooltip text={t.tags[task.priority]}>
+                <Tooltip text={t.task.priority[task.priority]}>
                   <div
                     className="w-2 h-2 rounded-full"
                     style={{ backgroundColor: task.priority === 'HIGH' ? '#ef4444' : task.priority === 'MEDIUM' ? '#eab308' : '#22c55e' }}
@@ -80,12 +80,12 @@ export function Task({ task, index }: TaskProps) {
             {task.tags && task.tags.length > 0 && (
               <div className="mt-2 flex flex-wrap gap-1">
                 {task.tags.map(tag => (
-                  <Tooltip key={tag.id} text={t.tags[tag.name]}>
+                  <Tooltip key={tag.id} text={t.tags[tag.name as keyof typeof t.tags]}>
                     <span
                       className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium text-white"
                       style={{ backgroundColor: tag.color }}
                     >
-                      {t.tags[tag.name]}
+                      {t.tags[tag.name as keyof typeof t.tags]}
                     </span>
                   </Tooltip>
                 ))}

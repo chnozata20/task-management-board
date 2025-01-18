@@ -26,7 +26,7 @@ export const ExportMenu: React.FC = () => {
   };
 
   const handleExportExcel = () => {
-    // Excel verisi oluştur
+    // Create Excel data
     let csvContent = "Column,Task Title,Description,Assignee,Start Date,End Date\n";
     
     columns.forEach(column => {
@@ -57,9 +57,11 @@ export const ExportMenu: React.FC = () => {
   };
 
   const handleExportPDF = () => {
-    // PDF export işlemi için window.print() kullanacağız
-    window.print();
+    // PDF export
     setIsOpen(false);
+    setTimeout(() => {
+      window.print();
+    }, 500);
   };
 
   return (
